@@ -9,9 +9,7 @@
 	<div id="example">
 		<h1>{{orderId}}</h1>
 		<p>
-			<span cg-bind="user.name"></span>
-			,
-			<span>{{user.sex}}</span>
+			<span cg-bind="user.name" title="{{user.sex}}"></span>
 		</p>
 		<select cg-bind="user.age">
 			<option value="18">18</option>

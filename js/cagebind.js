@@ -2,23 +2,29 @@
     'use strict';
 
     $.fn.extend({
-        bindData: function(data) {
+        bindData: function (data) {
             if (!$.isPlainObject(data)) {
                 return;
             }
 
             var that = this;
 
-            var setval = function(element, value) {
+            var isNull = function(value){
+                return value === null || value === undefined;
+            };
+
+            var setval = function (element, value) {
                 if (element.is('input') || element.is('select')) {
                     element.val(value).trigger('change');
                 } else {
                     element.text(value);
                 }
-            }
+            };
 
-            var getval = function(obj, key) {
-                if (!key) return;
+            var getval = function (obj, key) {
+                if (!key) {
+                    return;
+                }
 
                 var keys = key.split('.'),
                     result = obj;
@@ -30,53 +36,56 @@
                 return result;
             };
 
-            var replaceAttr = function(element, obj) {
-                var element = $(element),
-                    attrs = element[0].attributes,
+            var replaceAttr = function (element, obj) {
+                element = $(element);
+
+                var attrs = element[0].attributes,
                     re = /\{\{([^\}]+)\}\}/g,
-                    text = element.text();
+                    text = element.text(),
+                    value,
+                    index;
 
                 for (var i = 0, len = attrs.length; i < len; i++) {
                     if (re.test(attrs[i].value)) {
-                        var index = RegExp.$1,
-                            value = getval(obj, index);
-                        if (value) {
-                            setval(element, value);
+                        index = RegExp.$1;
+                        value = getval(obj, index);
+                        if (!isNull(value)) {
+                            attrs[i].value = attrs[i].value.replace(re, value);
                         }
                     }
                 }
 
                 if (re.test(text)) {
-                    var index = RegExp.$1;
+                    index = RegExp.$1;
                     value = getval(obj, index);
-                    if (value) {
+                    if (!isNull(value)) {
                         element.text(text.replace(re, value));
                     }
                 }
             };
 
-            var bindElement = function(element, obj) {
-                var element = $(element),
-                    cgbind = element.attr('cg-bind'),
+            var bindElement = function (element, obj) {
+                element = $(element);
+                var cgbind = element.attr('cg-bind'),
                     value = getval(data, cgbind),
                     children = element.children();
 
                 if (children.length === 0) {
                     replaceAttr(element, obj);
-                    if (value) {
+                    if (!isNull(value)) {
                         setval(element, value);
                     }
                     return;
                 } else {
                     for (var i = children.length - 1; i >= 0; i--) {
-                        bindElement(children[i], obj)
-                    };
+                        bindElement(children[i], obj);
+                    }
                 }
-            }
+            };
 
             bindElement(that, data);
         },
-        bindList: function(config, callback) {
+        bindList: function (config, callback) {
             var data = config.data || {},
                 templateId = config.templateId,
                 length = config.length;
@@ -111,6 +120,7 @@
                 callback(that);
             }
         },
+
         bind: function(config, callback) {
             var that = this,
                 data = config.data || {},
