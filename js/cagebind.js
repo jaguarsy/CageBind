@@ -2,7 +2,9 @@
     'use strict';
 
     $.fn.extend({
+        //绑定对象
         bindData: function (data) {
+            // 是否为纯对象
             if (!$.isPlainObject(data)) {
                 return;
             }
@@ -13,6 +15,7 @@
                 return value === null || value === undefined;
             };
 
+            // 针对不同元素的赋值方法
             var setval = function (element, value) {
                 if (element.is('input') || element.is('select')) {
                     element.val(value).trigger('change');
@@ -21,6 +24,7 @@
                 }
             };
 
+            // 根据key获取对象属性值，支持obj.key1.key2的调用方式
             var getval = function (obj, key) {
                 if (!key) {
                     return;
@@ -36,6 +40,7 @@
                 return result;
             };
 
+            // 替换属性值中的{{}}
             var replaceAttr = function (element, obj) {
                 element = $(element);
 
@@ -64,6 +69,7 @@
                 }
             };
 
+            // 递归遍历所有后代节点元素，并绑定数据
             var bindElement = function (element, obj) {
                 element = $(element);
                 var cgbind = element.attr('cg-bind'),
@@ -85,6 +91,7 @@
 
             bindElement(that, data);
         },
+        //绑定列表
         bindList: function (config, callback) {
             var data = config.data || {},
                 templateId = config.templateId,
@@ -121,6 +128,7 @@
             }
         },
 
+        //对象列表通用绑定函数
         bind: function(config, callback) {
             var that = this,
                 data = config.data || {},
