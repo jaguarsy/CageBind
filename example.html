@@ -1,84 +1,84 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title></title>
-	<link rel="stylesheet" href=""></head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <link rel="stylesheet" href=""></head>
 <body>
-	<div id="example">
-		<h1>{{orderId}}</h1>
-		<p>
-			<span cg-bind="user.name" title="{{user.sex}}"></span>
-		</p>
-		<select cg-bind="user.age">
-			<option value="18">18</option>
-			<option value="19">19</option>
-			<option value="20">20</option>
-			<option value="21">21</option>
-			<option value="22">22</option>
-		</select>
-		<p><strong cg-bind="orderKind"></strong></p>
-		<p><<{{orderName}}>></p>
-	</div>
-	<hr/>
-	<table>
-		<thead>
-			<tr>
-				<td>name</td>
-				<td>sex</td>
-				<td>age</td>
-			</tr>
-		</thead>
-		<tbody id="exampletable"></tbody>
-	</table>
-	<script type="text/html" id="exampleTemplate">
-		<tr>
-			<td cg-bind="name"></td>
-			<td cg-bind="sex"></td>
-			<td cg-bind="age"></td>
-		</tr>
-	</script>
-	<script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
-	<script src="js/cagebind.js"></script>
-	<script>
-		$(function(){
-			var data = {
-					user: {
-						name: "test",
-						age: 18,
-						sex: "男"
-					},
-					orderId: 10001,
-					orderKind: 'Book',
-					orderName: 'Harry Potter'
-				},
-				list = [
-					{
-						name: "test",
-						age: 18,
-						sex: "男"
-					},
-					{
-						name: "test2",
-						age: 19,
-						sex: "男"
-					},
-					{
-						name: "test3",
-						age: 20,
-						sex: "女"
-					},
-					{
-						name: "test4",
-						age: 21,
-						sex: "男"
-					}
-				];
+    <div id="example">
+        <h1>{{orderId}}</h1>
+        <p>
+            <span cg-bind="user.name" title="{{user.sex}}"></span>
+        </p>
+        <select cg-bind="user.age">
+            <option value="18">18</option>
+            <option value="19">19</option>
+            <option value="20">20</option>
+            <option value="21">21</option>
+            <option value="22">22</option>
+        </select>
+        <p><strong cg-bind="orderKind"></strong></p>
+        <p><<{{orderName}}>></p>
+    </div>
+    <hr/>
+    <table>
+        <thead>
+            <tr>
+                <td>name</td>
+                <td>sex</td>
+                <td>age</td>
+            </tr>
+        </thead>
+        <tbody id="exampletable"></tbody>
+    </table>
+    <script type="text/html" id="exampleTemplate">
+        <tr>
+            <td cg-bind="name"></td>
+            <td cg-bind="sex"></td>
+            <td cg-bind="age"></td>
+        </tr>
+    </script>
+    <script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+    <script src="js/cagebind.js"></script>
+    <script>
+        $(function(){
+            var data = {
+                    user: {
+                        name: "test",
+                        age: 18,
+                        sex: "男"
+                    },
+                    orderId: 10001,
+                    orderKind: 'Book',
+                    orderName: 'Harry Potter'
+                },
+                list = [
+                    {
+                        name: "test",
+                        age: 18,
+                        sex: "男"
+                    },
+                    {
+                        name: "test2",
+                        age: 19,
+                        sex: "男"
+                    },
+                    {
+                        name: "test3",
+                        age: 20,
+                        sex: "女"
+                    },
+                    {
+                        name: "test4",
+                        age: 21,
+                        sex: "男"
+                    }
+                ];
 
-			$('#example').bind({ data: data });
-			$('#exampletable').bind({ data: list, templateId: '#exampleTemplate' });
-		});
-	</script>
+            $('#example').bind({ data: data });
+            $('#exampletable').bind({ data: list, templateId: '#exampleTemplate' });
+        });
+    </script>
 </body>
 </html>
