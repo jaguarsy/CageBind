@@ -1,4 +1,4 @@
-(function($) {
+(function ($) {
     'use strict';
 
     $.fn.extend({
@@ -11,7 +11,7 @@
 
             var that = this;
 
-            var isNull = function(value){
+            var isNull = function (value) {
                 return value === null || value === undefined;
             };
 
@@ -30,11 +30,13 @@
                     return;
                 }
 
-                var keys = key.split('.'),
+                var keys = key.split(/[\.\[\]]/),
                     result = obj;
 
                 for (var i = 0, len = keys.length; i < len; i++) {
-                    result = result[keys[i]];
+                    if (keys[i]) {
+                        result = result[keys[i]];
+                    }
                 }
 
                 return result;
@@ -129,7 +131,7 @@
         },
 
         //对象列表通用绑定函数
-        bind: function(config, callback) {
+        bind: function (config, callback) {
             var that = this,
                 data = config.data || {},
                 templateId = config.templateId,

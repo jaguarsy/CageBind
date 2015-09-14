@@ -21,7 +21,7 @@
         <option value="22">22</option>
     </select>
 
-    <p><strong cg-bind="orderKind"></strong></p>
+    <p><strong cg-bind="orderKind[0].name"></strong></p>
 
     <p><<{{orderName}}>></p>
     <textarea cg-bind="detail"></textarea>
@@ -45,7 +45,8 @@
     </tr>
 </script>
 <script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
-<script src="dist/jquery.cagebind.min.js"></script>
+<!-- <script src="dist/jquery.cagebind.min.js"></script> -->
+<script src="src/cagebind.js"></script>
 <script>
     $(function () {
         var data = {
@@ -55,7 +56,7 @@
                         sex: "male"
                     },
                     orderId: 10001,
-                    orderKind: 'Book',
+                    orderKind: [{name:'Book'},{name:"Legend"}],
                     orderName: 'Harry Potter',
                     detail: 'This is for test.'
                 },
