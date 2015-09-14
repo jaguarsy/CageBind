@@ -34,7 +34,7 @@
                     result = obj;
 
                 for (var i = 0, len = keys.length; i < len; i++) {
-                    if (keys[i]) {
+                    if (keys[i] && result) {
                         result = result[keys[i]];
                     }
                 }
