@@ -131,7 +131,7 @@
         },
 
         //对象列表通用绑定函数
-        bind: function (config, callback) {
+        cgbind: function (config, callback) {
             var that = this,
                 data = config.data || {},
                 templateId = config.templateId,
