@@ -35,7 +35,11 @@
         <td>age</td>
     </tr>
     </thead>
-    <tbody id="exampletable"></tbody>
+    <tbody id="exampletable">
+        <tr>
+            <td>123</td>
+        </tr>
+    </tbody>
 </table>
 <script type="text/html" id="exampleTemplate">
     <tr>
@@ -82,8 +86,8 @@
                     }
                 ];
 
-        $('#example').bind({data: data});
-        $('#exampletable').bind({data: list, templateId: '#exampleTemplate'});
+        $('#example').cgbind({data: data});
+        $('#exampletable').cgbind({data: list, templateId: '#exampleTemplate', empty:false});
     });
 </script>
 </body>

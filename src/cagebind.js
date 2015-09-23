@@ -96,6 +96,7 @@
         //绑定列表
         bindList: function (config, callback) {
             var data = config.data || {},
+            	empty = config.empty === undefined ? true:config.empty,
                 templateId = config.templateId,
                 length = config.length;
 
@@ -108,7 +109,9 @@
 
             length = length || data.length;
 
-            that.empty();
+            if(empty){
+            	that.empty();
+            }
             for (var i = 0, len = length; i < len; i++) {
                 var item = template.clone();
                 that.append(item);
