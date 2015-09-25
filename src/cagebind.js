@@ -71,7 +71,7 @@
 
                 var attrs = element[0].attributes,
                     re = /\{\{([^\}]+)\}\}/g,
-                    text = element.text(),
+                    html = element.html(),
                     value,
                     index;
 
@@ -96,11 +96,11 @@
                     }
                 }
 
-                if (re.test(text)) {
+                if (re.test(html)) {
                     index = RegExp.$1;
                     value = getval(obj, index);
                     if (!isNull(value)) {
-                        element.text(text.replace(re, value));
+                        element.html(html.replace(re, value));
                     }
                 }
             };
@@ -164,10 +164,10 @@
                         ele.text(data[i]);
                     }
                 }
-            }
 
-            if ($.isFunction(callback)) {
-                callback(that);
+                if ($.isFunction(callback)) {
+                    callback(item, data[i]);
+                }
             }
         },
 

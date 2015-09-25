@@ -13,7 +13,7 @@
 </head>
 <body>
 <div id="example">
-    <h1>{{orderId}}</h1>
+    <h1>{{orderId}}<span cg-bind="user.name"></span></h1>
 
     <p>
         <span cg-bind="user.name" title="{{user.sex}}"></span>
@@ -34,7 +34,13 @@
     <p cg-show="cgshow">测试cg-show</p>
 
     <p cg-class="test:cgclass">测试cg-class</p>
+
 </div>
+
+<ul id="doubleList">
+
+</ul>
+
 <hr/>
 <table>
     <thead>
@@ -50,14 +56,31 @@
     </tr>
     </tbody>
 </table>
+
 <script type="text/html" id="exampleTemplate">
     <tr>
         <td cg-bind="name"></td>
         <td cg-bind="sex"></td>
         <td cg-bind="age"></td>
-        <td><button data-test="{{name}}{{sex}}"><span></span></button></td>
+        <td>
+            <button data-test="{{name}}{{sex}}"><span></span></button>
+        </td>
     </tr>
 </script>
+
+<script type="text/html" id="liTemplate">
+    <li>
+        <h1 cg-bind="title"></h1>
+        <ul class="sublist">
+        </ul>
+    </li>
+</script>
+
+<script type="text/html" id="subliTemplate">
+    <li cg-bind="name">
+    </li>
+</script>
+
 <script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
 <script src="dist/jquery.cagebind.min.js"></script>
 <script>
@@ -96,7 +119,16 @@
                         age: 21,
                         sex: "male"
                     }
+                ],
+                doublelist = [
+                    {title: 'test1', sublist: [{name: 111}, {name: 222}, {name: 333}]},
+                    {title: 'test2', sublist: [{name: 112}, {name: 223}, {name: 334}]},
+                    {title: 'test3', sublist: [{name: 113}, {name: 224}, {name: 335}]}
                 ];
+
+        $('#doubleList').cgbind({data: doublelist, templateId: '#liTemplate'}, function (item, obj) {
+            item.find('.sublist').cgbind({data: obj.sublist, templateId: '#subliTemplate'});
+        });
 
         $('#example').cgbind({data: data});
         $('#exampletable').cgbind({data: list, templateId: '#exampleTemplate', empty: false});
