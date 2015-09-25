@@ -5,6 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title></title>
     <link rel="stylesheet" href="">
+    <style>
+        .test {
+            font-weight: bolder;
+        }
+    </style>
 </head>
 <body>
 <div id="example">
@@ -25,6 +30,10 @@
 
     <p><<{{orderName}}>></p>
     <textarea cg-bind="detail"></textarea>
+
+    <p cg-show="cgshow">测试cg-show</p>
+
+    <p cg-class="test:cgclass">测试cg-class</p>
 </div>
 <hr/>
 <table>
@@ -36,9 +45,9 @@
     </tr>
     </thead>
     <tbody id="exampletable">
-        <tr>
-            <td>123</td>
-        </tr>
+    <tr>
+        <td>123</td>
+    </tr>
     </tbody>
 </table>
 <script type="text/html" id="exampleTemplate">
@@ -46,6 +55,7 @@
         <td cg-bind="name"></td>
         <td cg-bind="sex"></td>
         <td cg-bind="age"></td>
+        <td><button data-test="{{name}}{{sex}}"><span></span></button></td>
     </tr>
 </script>
 <script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
@@ -55,13 +65,15 @@
         var data = {
                     user: {
                         name: "test",
-                        age: 18,
+                        age: 20,
                         sex: "male"
                     },
                     orderId: 10001,
                     orderKind: [{name: 'Book'}, {name: "Legend"}],
                     orderName: 'Harry Potter',
-                    detail: 'This is for test.'
+                    detail: 'This is for test.',
+                    cgshow: false,
+                    cgclass: true
                 },
                 list = [
                     {
@@ -87,7 +99,7 @@
                 ];
 
         $('#example').cgbind({data: data});
-        $('#exampletable').cgbind({data: list, templateId: '#exampleTemplate', empty:false});
+        $('#exampletable').cgbind({data: list, templateId: '#exampleTemplate', empty: false});
     });
 </script>
 </body>

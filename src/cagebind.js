@@ -9,7 +9,8 @@
                 return;
             }
 
-            var that = this;
+            var that = this,
+                cgFuncEnum;
 
             var isNull = function (value) {
                 return value === null || value === undefined;
@@ -42,7 +43,29 @@
                 return result;
             };
 
-            // 替换属性值中的{{}}
+            cgFuncEnum = {
+                'cg-show': function (element) {
+                    var value = getval(data, element.attr('cg-show'));
+
+                    if (value) {
+                        element.show();
+                    } else {
+                        element.hide();
+                    }
+                },
+                'cg-class': function (element) {
+                    var value = element.attr('cg-class'),
+                        list = value && value.split(':'),
+                        classname = list && list[0].trim(),
+                        bool = getval(data, list && list[1].trim());
+
+                    if (bool) {
+                        element.addClass(classname);
+                    }
+                }
+            };
+
+            // 替换属性值中的{{}}, 以及对一些特殊绑定的特殊处理
             var replaceAttr = function (element, obj) {
                 element = $(element);
 
@@ -53,11 +76,22 @@
                     index;
 
                 for (var i = 0, len = attrs.length; i < len; i++) {
-                    if (re.test(attrs[i].value)) {
-                        index = RegExp.$1;
-                        value = getval(obj, index);
-                        if (!isNull(value)) {
-                            attrs[i].value = attrs[i].value.replace(re, value);
+                    var attrvalue = attrs[i].value,
+                        attrname = attrs[i].name;
+
+                    if (cgFuncEnum[attrname]) {
+                        cgFuncEnum[attrname](element);
+                    }
+
+                    var matches = attrvalue.match(re);
+                    for (var item in matches) {
+                        var name = matches[item];
+                        if (name) {
+                            index = name.replace('{{', '').replace('}}', '');
+                            value = getval(obj, index);
+                            if (!isNull(value)) {
+                                attrs[i].value = attrs[i].value.replace(name, value);
+                            }
                         }
                     }
                 }
@@ -88,6 +122,10 @@
                     for (var i = children.length - 1; i >= 0; i--) {
                         bindElement(children[i], obj);
                     }
+                    replaceAttr(element, obj);
+                    if (!isNull(value)) {
+                        setval(element, value);
+                    }
                 }
             };
 
@@ -96,7 +134,7 @@
         //绑定列表
         bindList: function (config, callback) {
             var data = config.data || {},
-            	empty = config.empty === undefined ? true:config.empty,
+                empty = config.empty === undefined ? true : config.empty,
                 templateId = config.templateId,
                 length = config.length;
 
@@ -109,8 +147,8 @@
 
             length = length || data.length;
 
-            if(empty){
-            	that.empty();
+            if (empty) {
+                that.empty();
             }
             for (var i = 0, len = length; i < len; i++) {
                 var item = template.clone();
