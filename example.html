@@ -12,6 +12,7 @@
     </style>
 </head>
 <body>
+<h1>{{orderId}}<span cg-bind="user.name"></span></h1>
 <div id="example">
     <h1>{{orderId}}<span cg-bind="user.name"></span></h1>
 
@@ -34,7 +35,8 @@
     <p cg-show="cgshow">测试cg-show</p>
 
     <p cg-class="test:cgclass">测试cg-class</p>
-
+    <p>checkbox:<input type="checkbox" cg-bind="cgclass"/></p>
+    <p>radio: <input type="radio" cg-bind="cgclass"/></p>
 </div>
 
 <ul id="doubleList">

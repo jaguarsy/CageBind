@@ -19,7 +19,12 @@
             // 针对不同元素的赋值方法
             var setval = function (element, value) {
                 if (element.is('input') || element.is('select')) {
-                    element.val(value).trigger('change');
+                    if (element.is('[type=checkbox]') ||
+                        element.is('[type=radio]')) {
+                        element.prop('checked', value);
+                    } else {
+                        element.val(value).trigger('change');
+                    }
                 } else {
                     element.text(value);
                 }
@@ -158,10 +163,16 @@
                     item.bindData(data[i]);
                 } else {
                     var ele = item.find('[cg-bind=value]');
+
                     if (ele.is('input') || ele.is('select')) {
-                        ele.val(data[i]).trigger('change');
+                        if (ele.is('[type=checkbox]') ||
+                            ele.is('[type=radio]')) {
+                            ele.prop('checked', data[i]);
+                        } else {
+                            ele.val(data[i]).trigger('change');
+                        }
                     } else {
-                        ele.text(data[i]);
+                        element.text(data[i]);
                     }
                 }
 
