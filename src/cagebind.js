@@ -50,7 +50,17 @@
 
             cgFuncEnum = {
                 'cg-show': function (element) {
-                    var value = getval(data, element.attr('cg-show'));
+                    var attr = element.attr('cg-show'),
+                        value;
+                    if (!attr) {
+                        return;
+                    }
+                    var list = attr.split('==');
+                    if (list.length > 1) {
+                        value = getval(data, list[0]) == list[1];
+                    } else {
+                        value = getval(data, attr);
+                    }
 
                     if (value) {
                         element.show();
