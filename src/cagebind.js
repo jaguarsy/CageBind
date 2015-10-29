@@ -45,7 +45,7 @@
                     }
                 }
 
-                return result;
+                return result === undefined ? null : result;
             };
 
             cgFuncEnum = {
@@ -130,7 +130,7 @@
                 if (children.length === 0) {
                     replaceAttr(element, obj);
                     //if(!isNull(value)){
-                        setval(element, value);
+                    setval(element, value);
                     //}
                     return;
                 } else {
@@ -139,7 +139,7 @@
                     }
                     replaceAttr(element, obj);
                     //if(!isNull(value)){
-                        setval(element, value);
+                    setval(element, value);
                     //}
                 }
             };
