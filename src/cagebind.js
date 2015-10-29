@@ -129,18 +129,18 @@
 
                 if (children.length === 0) {
                     replaceAttr(element, obj);
-                    if (!isNull(value)) {
+                    //if(!isNull(value)){
                         setval(element, value);
-                    }
+                    //}
                     return;
                 } else {
                     for (var i = children.length - 1; i >= 0; i--) {
                         bindElement(children[i], obj);
                     }
                     replaceAttr(element, obj);
-                    if (!isNull(value)) {
+                    //if(!isNull(value)){
                         setval(element, value);
-                    }
+                    //}
                 }
             };
 

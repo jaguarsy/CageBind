@@ -14,7 +14,7 @@
 <body>
 <h1>{{orderId}}<span cg-bind="user.name"></span></h1>
 <div id="example">
-    <h1>{{orderId}}<span cg-bind="user.name"></span></h1>
+    <h1>{{orderId}}<span cg-bind="user.name">test</span></h1>
 
     <p>
         <span cg-bind="user.name" title="{{user.sex}}"></span>
@@ -89,7 +89,7 @@
     $(function () {
         var data = {
                     user: {
-                        name: "test",
+                        name: null,
                         age: 20,
                         sex: "male"
                     },
