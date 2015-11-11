@@ -19,12 +19,15 @@
             // 针对不同元素的赋值方法
             var setval = function (element, value) {
                 if (element.is('input') || element.is('select')) {
-                    if (element.is('[type=checkbox]') ||
-                        element.is('[type=radio]')) {
+                    if (element.is('[type=checkbox]')) {
                         element.prop('checked', value);
+                    } else if (element.is('[type=radio]')) {
+                        element.prop('checked', value.toString() == element.val());
                     } else {
                         element.val(value).trigger('change');
                     }
+                } else if (element.is('img') && value) {
+                    element.attr('src', value);
                 } else {
                     element.text(value);
                 }

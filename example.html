@@ -12,30 +12,32 @@
     </style>
 </head>
 <body>
+<small>test</small>
 <div id="example">
     <h1>{{orderId}}<label><span cg-bind="user.name">test</span></label></h1>
+    <input type="radio" value="true" cg-bind="testradio"/>
+    <input type="radio" value="false" cg-bind="testradio"/>
+    <p>
+    <span cg-bind="user.name" title="{{user.sex}}"></span>
+    </p>
+    <select cg-bind="user.age">
+    <option value="18">18</option>
+    <option value="19">19</option>
+    <option value="20">20</option>
+    <option value="21">21</option>
+    <option value="22">22</option>
+    </select>
 
-    <!--<p>-->
-        <!--<span cg-bind="user.name" title="{{user.sex}}"></span>-->
-    <!--</p>-->
-    <!--<select cg-bind="user.age">-->
-        <!--<option value="18">18</option>-->
-        <!--<option value="19">19</option>-->
-        <!--<option value="20">20</option>-->
-        <!--<option value="21">21</option>-->
-        <!--<option value="22">22</option>-->
-    <!--</select>-->
+    <p><strong cg-bind="orderKind[0].name"></strong></p>
 
-    <!--<p><strong cg-bind="orderKind[0].name"></strong></p>-->
+    <p><<{{orderName}}>></p>
+    <textarea cg-bind="detail"></textarea>
 
-    <!--<p><<{{orderName}}>></p>-->
-    <!--<textarea cg-bind="detail"></textarea>-->
+    <p cg-show="cgtest==1" style="display: none;">测试cg-show</p>
 
-    <!--<p cg-show="cgtest==1" style="display: none;">测试cg-show</p>-->
-
-    <!--<p cg-class="test:cgclass">测试cg-class</p>-->
-    <!--<p>checkbox:<input type="checkbox" cg-bind="cgclass"/></p>-->
-    <!--<p>radio: <input type="radio" cg-bind="cgclass"/></p>-->
+    <p cg-class="test:cgclass">测试cg-class</p>
+    <p>checkbox:<input type="checkbox" cg-bind="cgclass"/></p>
+    <p>radio: <input type="radio" cg-bind="cgclass"/></p>
 </div>
 
 <!--<ul id="doubleList">-->
@@ -44,18 +46,18 @@
 
 <!--<hr/>-->
 <!--<table>-->
-    <!--<thead>-->
-    <!--<tr>-->
-        <!--<td>name</td>-->
-        <!--<td>sex</td>-->
-        <!--<td>age</td>-->
-    <!--</tr>-->
-    <!--</thead>-->
-    <!--<tbody id="exampletable">-->
-    <!--<tr>-->
-        <!--<td>123</td>-->
-    <!--</tr>-->
-    <!--</tbody>-->
+<!--<thead>-->
+<!--<tr>-->
+<!--<td>name</td>-->
+<!--<td>sex</td>-->
+<!--<td>age</td>-->
+<!--</tr>-->
+<!--</thead>-->
+<!--<tbody id="exampletable">-->
+<!--<tr>-->
+<!--<td>123</td>-->
+<!--</tr>-->
+<!--</tbody>-->
 <!--</table>-->
 
 <script type="text/html" id="exampleTemplate">
@@ -97,7 +99,8 @@
                     detail: 'This is for test.',
                     cgshow: true,
                     cgclass: true,
-                    cgtest: '1'
+                    cgtest: '1',
+                    testradio: true
                 },
                 list = [
                     {
