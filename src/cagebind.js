@@ -22,7 +22,8 @@
                     if (element.is('[type=checkbox]')) {
                         element.prop('checked', value);
                     } else if (element.is('[type=radio]')) {
-                        element.prop('checked', value.toString() == element.val());
+                        var str = value ? value.toString() : undefined;
+                        element.prop('checked', str == element.val());
                     } else {
                         element.val(value).trigger('change');
                     }
@@ -132,18 +133,18 @@
 
                 if (children.length === 0) {
                     replaceAttr(element, obj);
-                    //if(!isNull(value)){
-                    setval(element, value);
-                    //}
+                    if (!isNull(cgbind)) {
+                        setval(element, value);
+                    }
                     return;
                 } else {
                     for (var i = children.length - 1; i >= 0; i--) {
                         bindElement(children[i], obj);
                     }
                     replaceAttr(element, obj);
-                    //if(!isNull(value)){
-                    setval(element, value);
-                    //}
+                    if (!isNull(cgbind)) {
+                        setval(element, value);
+                    }
                 }
             };
 
