@@ -14,7 +14,7 @@
 <body>
 <small>test</small>
 <div id="example">
-    <h1>{{orderId}}<label><span cg-bind="user.name">test</span></label></h1>
+    <h1>{{orderId}}{{user.name}}<label><span cg-bind="user.name">test</span></label></h1>
     <input type="radio" value="true" cg-bind="testradio"/>
     <input type="radio" value="false" cg-bind="testradio"/>
     <p>
@@ -36,29 +36,29 @@
     <p cg-show="cgtest==1" style="display: none;">测试cg-show</p>
 
     <p cg-class="test:cgclass">测试cg-class</p>
-    <p>checkbox:<input type="checkbox" cg-bind="cgclass"/></p>
+    <p id="test">checkbox:<input type="checkbox" cg-bind="cgclass"/>{{test}}<span>asd</span>{{bbb}}</p>
     <p>radio: <input type="radio" cg-bind="cgclass"/></p>
 </div>
 
-<!--<ul id="doubleList">-->
+<ul id="doubleList">
 
-<!--</ul>-->
+</ul>
 
-<!--<hr/>-->
-<!--<table>-->
-<!--<thead>-->
-<!--<tr>-->
-<!--<td>name</td>-->
-<!--<td>sex</td>-->
-<!--<td>age</td>-->
-<!--</tr>-->
-<!--</thead>-->
-<!--<tbody id="exampletable">-->
-<!--<tr>-->
-<!--<td>123</td>-->
-<!--</tr>-->
-<!--</tbody>-->
-<!--</table>-->
+<hr/>
+<table>
+    <thead>
+    <tr>
+        <td>name</td>
+        <td>sex</td>
+        <td>age</td>
+    </tr>
+    </thead>
+    <tbody id="exampletable">
+    <tr>
+        <td>123</td>
+    </tr>
+    </tbody>
+</table>
 
 <script type="text/html" id="exampleTemplate">
     <tr>

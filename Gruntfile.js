@@ -26,7 +26,7 @@ module.exports = function (grunt) {
             },
             build: {
                 files: {
-                    'dist/jquery.cagebind.min.js': 'src/cagebind.js'
+                    'dist/cagebind.min.js': 'src/cagebind.js'
                 }
             }
         },
